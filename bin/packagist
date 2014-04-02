@@ -1,0 +1,12 @@
+#!/usr/bin/env php
+<?php
+
+if (PHP_SAPI != 'cli') {
+    throw new LogicException('Generate should be invoked via the CLI version of PHP' . PHP_EOL);
+}
+
+require __DIR__ . '/../vendor/autoload.php';
+
+$application = new Packagist\Application;
+$application->setBasePath(__DIR__);
+$application->run();
