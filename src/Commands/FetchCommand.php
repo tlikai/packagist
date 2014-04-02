@@ -22,7 +22,7 @@ class FetchCommand extends Command
                 $this->error('Request error!');
                 return;
             }
-            file_put_contents($this->getApplication()->getConfig('publicPath') . '/list/packages.json', $response->body);
+            file_put_contents($this->getApplication()->getConfig('publicPath') . '/packages/list.json', $response->body);
         } catch (Exception $e) {
             $this->error($e->getMessage());
         }
