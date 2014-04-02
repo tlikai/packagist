@@ -4,7 +4,7 @@ use Symfony\Component\Console\Application as ConsoleApplication;
 
 class Application extends ConsoleApplication
 {
-    protected $basePath;
+    protected $config = [];
 
     public function __construct($name = 'Packgist', $version = '1.0.0')
     {
@@ -14,17 +14,21 @@ class Application extends ConsoleApplication
     public function getDefaultCommands()
     {
         return array_merge(parent::getDefaultCommands(), array(
-            new Commands\FetcherCommand,
+            new Commands\FetchCommand,
+            new Commands\FetchPackageCommand,
         ));
     }
 
-    public function setBasePath($path)
+    public function setConfig($config)
     {
-        $this->basePath = $path;
+        $this->config = $config;
     }
 
-    public function getBasePath()
+    public function getConfig($name = null)
     {
-        return $this->basePath;
+        if (empty($name)) {
+            return $this->config;
+        } 
+        return isset($this->config[$name]) ? $this->config[$name] : null;
     }
 }
