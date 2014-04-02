@@ -1,4 +1,6 @@
-<?php namespace Packagist;
+<?php
+
+namespace Packagist;
 
 use Symfony\Component\Console\Application as ConsoleApplication;
 
