@@ -14,6 +14,7 @@ class Application extends ConsoleApplication
     public function getDefaultCommands()
     {
         return array_merge(parent::getDefaultCommands(), array(
+            new Commands\ImportCommand,
             new Commands\FetchCommand,
             new Commands\FetchPackageCommand,
         ));
