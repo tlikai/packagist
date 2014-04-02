@@ -1,4 +1,6 @@
-<?php namespace Packagist\Commands;
+<?php
+
+namespace Packagist\Commands;
 
 use Symfony\Component\Console\Command\Command as BaseCommand;
 use Symfony\Component\Console\Input\InputArgument;
