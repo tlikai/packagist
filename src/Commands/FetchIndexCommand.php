@@ -12,8 +12,6 @@ class FetchIndexCommand extends Command
 
     public function fire()
     {
-        $verbose = $this->getOption('verbose');
-        $verbose && $this->info("Fetch {$url}");
         try {
             $data = $this->getPackages();
             if (empty($data)) {
@@ -28,7 +26,9 @@ class FetchIndexCommand extends Command
 
     public function getPackages()
     {
+        $verbose = $this->getOption('verbose');
         $url = 'https://packagist.org/packages.json';
+        $verbose && $this->info("Fetch {$url}");
         $config = $this->getApplication()->getConfig('request');
         $response = Requests::get($url, $config['headers'], $config['options']);
         if ($response->status_code != 200) {
@@ -41,6 +41,7 @@ class FetchIndexCommand extends Command
 
     public function getProviderInclude($data)
     {
+        $verbose = $this->getOption('verbose');
         // provider directory
         $pPath = $this->getApplication()->getConfig('publicPath') . '/p';
         if (!is_dir($pPath)) {
@@ -51,12 +52,14 @@ class FetchIndexCommand extends Command
         $config = $this->getApplication()->getConfig('request');
         foreach ($packages['provider-includes'] as $providerHashUrl => $hash) {
             $providers = str_replace('%hash%', $hash['sha256'], $providerHashUrl);
-            $response = Requests::get("https://packagist.org/{$providers}", $config['headers'], $config['options']);
+            $url = "https://packagist.org/{$providers}";
+            $response = Requests::get($url, $config['headers'], $config['options']);
             if ($response->status_code != 200) {
                 $this->error('Request error!');
                 return;
             }
             file_put_contents($this->getApplication()->getConfig('publicPath') . '/' . $providers, $response->body);
+            $verbose && $this->info("Fetch {$url}");
         }
     }
 }
