@@ -4,9 +4,9 @@ namespace Packagist\Commands;
 
 use Requests;
 
-class FetchCommand extends Command
+class FetchListCommand extends Command
 {
-    protected $name = 'fetch:all';
+    protected $name = 'fetch:list';
 
     protected $description = 'Fetch all packages from packagist';
 
@@ -22,7 +22,9 @@ class FetchCommand extends Command
                 $this->error('Request error!');
                 return;
             }
-            file_put_contents($this->getApplication()->getConfig('publicPath') . '/packages/list.json', $response->body);
+            $packagesPath = $this->getApplication()->getConfig('publicPath') . '/packages';
+            !is_dir($packagesPath)  && mkdir($packagesPath, 0755, true);
+            file_put_contents($packagesPath . '/list.json', $response->body);
         } catch (Exception $e) {
             $this->error($e->getMessage());
         }
