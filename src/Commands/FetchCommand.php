@@ -4,9 +4,9 @@ namespace Packagist\Commands;
 
 use Requests;
 
-class FetchCommand extends Command
+class FetchListCommand extends Command
 {
-    protected $name = 'fetch:all';
+    protected $name = 'fetch:list';
 
     protected $description = 'Fetch all packages from packagist';
 
