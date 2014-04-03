@@ -21,6 +21,14 @@ class ImportCommand extends Command
             '',
         ]);
 
+        $command = $this->getApplication()->find('fetch:index');
+        $code = $command->run($input, $this->output);
+        if ($code != 0) {
+            $this->error("Fetch index error");
+            return;
+        }
+        $this->info("Fetch index finish");
+        
         $command = $this->getApplication()->find('fetch:list');
         $code = $command->run($input, $this->output);
         if ($code != 0) {

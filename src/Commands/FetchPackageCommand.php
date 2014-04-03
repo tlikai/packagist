@@ -10,7 +10,7 @@ class FetchPackageCommand extends Command
 {
     protected $name = 'fetch:package';
 
-    protected $description = 'Fetch package from packagist ';
+    protected $description = 'Fetch package from packagist';
 
     protected $baseUrl = 'https://packagist.org/packages/{package}.json';
 
