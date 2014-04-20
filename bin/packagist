@@ -5,8 +5,10 @@ if (PHP_SAPI != 'cli') {
     throw new LogicException('Generate should be invoked via the CLI version of PHP' . PHP_EOL);
 }
 
+set_time_limit(0);
+ini_set('memory_limit', '2048M');
+
 require __DIR__ . '/../vendor/autoload.php';
 $config = include_once __DIR__ . '/../config.php';
-$application = new Packagist\Application;
-$application->setConfig($config);
+$application = new Packagist\Application($config);
 $application->run();

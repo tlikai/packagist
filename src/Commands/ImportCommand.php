@@ -11,7 +11,7 @@ class ImportCommand extends Command
 {
     protected $name = 'import';
 
-    protected $description = 'Import packages from packagist';
+    protected $description = 'Import packages from packagist.org';
 
     public function fire()
     {
@@ -24,19 +24,19 @@ class ImportCommand extends Command
         $command = $this->getApplication()->find('fetch:index');
         $code = $command->run($input, $this->output);
         if ($code != 0) {
-            $this->error("Fetch index error");
+            $this->error("Fetch package index faild");
             return;
         }
-        $this->info("Fetch index finish");
-        
+        $this->info("Fetch package index finish");
+
         $command = $this->getApplication()->find('fetch:list');
         $code = $command->run($input, $this->output);
         if ($code != 0) {
-            $this->error("Fetch all error");
+            $this->error("Fetch package list faild");
             return;
         }
+        $this->info("Fetch package list finish");
 
-        $this->info("Fetch all finish");
         $file = $this->getApplication()->getConfig('publicPath') . '/packages/list.json';
         $data = file_get_contents($file);
         $packages = json_decode($data, true);
@@ -48,7 +48,7 @@ class ImportCommand extends Command
                 '',
             ]);
             $code = $command->run($input, $this->output);
-            $code ? $this->error("Fetched package {$package} error") : $this->info("Fetch package {$package}");
+            $code ? $this->error("Fetched package {$package} faild") : $this->info("Fetch package {$package}");
         }
     }
 }
