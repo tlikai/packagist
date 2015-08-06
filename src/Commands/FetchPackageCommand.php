@@ -3,8 +3,9 @@
 namespace Packagist\Commands;
 
 use Requests;
-use Symfony\Component\Console\Input\InputArgument;
+use Packagist\Helpers\Downloader;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
 
 class FetchPackageCommand extends Command
 {
