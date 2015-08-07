@@ -17,6 +17,13 @@ class Application extends ConsoleApplication
         parent::__construct($this->name, $this->version);
         $this->config = $config;
         Helpers\Downloader::$basePath = $config['publicPath'];
+        if (! empty($config['downloader']['headers'])) {
+            Helpers\Downloader::$headers = array_merge(Helpers\Downloader::$headers, $config['downloader']['headers']);
+        }
+        if (! empty($config['downloader']['options'])) {
+            Helpers\Downloader::$options = array_merge(Helpers\Downloader::$options, $config['downloader']['options']);
+        }
+
     }
 
     public function getDefaultCommands()

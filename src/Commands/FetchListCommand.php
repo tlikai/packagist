@@ -3,6 +3,7 @@
 namespace Packagist\Commands;
 
 use Requests;
+use Packagist\Helpers\Downloader;
 
 class FetchListCommand extends Command
 {
@@ -15,7 +16,7 @@ class FetchListCommand extends Command
         $verbose = $this->getOption('verbose');
 
         $file = '/packages/list.json';
-        $verbose && $this->info("Downloading {$url}");
-        Download::download($file);
+        $verbose && $this->info("Downloading {$file}");
+        Downloader::download($file);
     }
 }
